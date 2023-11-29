@@ -7,23 +7,28 @@ export default function Home() {
 
   const onToggle = () => {
     if (darkMode === 'dark' || !darkMode) {
-      localStorage.setItem('darkMode', 'light')
+      localStorage.removeItem('theme')
       setDarkMode('light')
     } else {
-      localStorage.setItem('darkMode', 'dark')
+      localStorage.theme = 'dark'
       setDarkMode('dark')
     }
   }
 
   useEffect(() => {
-    const theme = localStorage.getItem('darkMode')
-
-    if (theme) setDarkMode(theme)
-    else onToggle()
+    if (
+      localStorage.theme === 'dark' ||
+      (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)
+    ) {
+      setDarkMode('dark')
+    } else {
+      setDarkMode('light')
+      localStorage.removeItem('theme')
+    }
   }, [])
 
   return (
-    <div className={` h-screen  w-screen bg ${darkMode} `}>
+    <div className={` h-screen  w-screen bg ${darkMode}`}>
       <header className='flex bg-purple-500 w-full h-20 items-center dark:bg-zinc-900'>
         <div className='flex w-[95%] md:w-[80%] mx-auto h-full items-center justify-between text-white'>
           <div className=' text-2xl font-bold'>LOGO</div>
