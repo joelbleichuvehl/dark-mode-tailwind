@@ -1,4 +1,3 @@
-// components/ThemedPage.tsx
 import { useThemeContext } from '../providers/theme-provider'
 
 const ThemedPage: React.FC<{ children: React.ReactNode }> = ({ children }) => {
