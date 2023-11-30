@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import Navbar from './components/Navbar'
 import ThemeProvider from './providers/theme-provider'
+import ThemedPage from './components/ThemedPage'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -16,8 +17,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang='pt-BR'>
       <ThemeProvider>
         <body className={`${inter.className} `}>
-          <Navbar />
-          {children}
+          <ThemedPage>
+            <Navbar />
+            {children}
+          </ThemedPage>
         </body>
       </ThemeProvider>
     </html>
